@@ -1,0 +1,38 @@
+{
+  "name": "peranta",
+  "version": "0.1.0",
+  "description": "HTTP-like API for inter-process communication (IPC)",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec test/ test/**/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loque/peranta.git"
+  },
+  "keywords": [
+    "express",
+    "koa",
+    "electron",
+    "webworker",
+    "ipc",
+    "http"
+  ],
+  "author": "Lucas Soler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/loque/peranta/issues"
+  },
+  "homepage": "https://github.com/loque/peranta#readme",
+  "dependencies": {
+    "array-flatten": "^2.1.0",
+    "path-to-regexp": "^1.7.0",
+    "qs": "^6.3.0",
+    "url-parse": "^1.1.7",
+    "uuid": "^3.0.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2"
+  }
+}
