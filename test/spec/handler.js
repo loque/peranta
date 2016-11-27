@@ -3,26 +3,29 @@
 const expect = require('chai').expect
 const Handler = require('../../lib/router/handler')
 
-describe('[spec] Handler', function()
+module.exports = function()
 {
-    it('should throw if the argument type is not a string', function()
+    describe('Handler', function()
     {
-        expect(function(){ new Handler(1) }).to.throw(`Handler.constructor() requires type to be a string`)
-    })
-
-    it('should throw if the argument handler is not a function', function()
-    {
-        expect(function(){ new Handler('type', 'not-a-function') }).to.throw(`Handler.constructor() requires handler to be of type function`)
-    })
-
-    let interfaceMethods = ['run', 'debug']
-    interfaceMethods.forEach(method =>
-    {
-        it(`should implement .${method}()`, function()
+        it('should throw if the argument type is not a string', function()
         {
-            let handler = new Handler('type', function(){})
+            expect(function(){ new Handler(1) }).to.throw(`Handler.constructor() requires type to be a string`)
+        })
 
-            expect(handler[method]).to.be.a('function')
+        it('should throw if the argument handler is not a function', function()
+        {
+            expect(function(){ new Handler('type', 'not-a-function') }).to.throw(`Handler.constructor() requires handler to be of type function`)
+        })
+
+        const interfaceMethods = ['run', 'debug']
+        interfaceMethods.forEach(method =>
+        {
+            it(`should implement .${method}()`, function()
+            {
+                const handler = new Handler('type', function(){})
+
+                expect(handler[method]).to.be.a('function')
+            })
         })
     })
-})
+}

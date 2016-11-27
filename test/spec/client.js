@@ -4,57 +4,60 @@ const expect = require('chai').expect
 const methods = require('../../lib/constants/methods')
 const Client = require('../../lib/client')
 
-describe('[spec] Client', function()
+module.exports = function test()
 {
-    describe('Transport', function()
+    describe('Client', function()
     {
-        it('should throw if no transport was sent', function()
+        describe('Transport', function()
         {
-            expect(function(){ let client = new Client() }).to.throw(`Client.constructor() expects to receive a transport`)
+            it('should throw if no transport was sent', function()
+            {
+                expect(function(){ const client = new Client() }).to.throw(`Client.constructor() expects to receive a transport`)
+            })
+
+            it('should throw if .on() is not set', function()
+            {
+                expect(function()
+                {
+                    new Client({ emit: function(){} })
+                })
+                .to.throw(`Client.constructor() expects transport to implement the method .on() and .emit()`)
+            })
+
+            it('should throw if .emit() is not set', function()
+            {
+                expect(function()
+                {
+                    new Client({ on: function(){} })
+                })
+                .to.throw(`Client.constructor() expects transport to implement the method .on() and .emit()`)
+            })
+
+            it('should throw if neither .on() or .emit() are set', function()
+            {
+                expect(function()
+                {
+                    new Client({})
+                })
+                .to.throw(`Client.constructor() expects transport to implement the method .on() and .emit()`)
+            })
         })
 
-        it('should throw if .on() is not set', function()
+        methods.forEach(method =>
         {
-            expect(function()
+            it(`should implement .${method}()`, function()
             {
-                new Client({ emit: function(){} })
+                const client = new Client({ on: function(){}, emit: function() {} })
+                expect(client[method]).to.be.a('function')
             })
-            .to.throw(`Client.constructor() expects transport to implement the method .on() and .emit()`)
         })
 
-        it('should throw if .emit() is not set', function()
+        it('should implement .on()', function()
         {
-            expect(function()
-            {
-                new Client({ on: function(){} })
-            })
-            .to.throw(`Client.constructor() expects transport to implement the method .on() and .emit()`)
-        })
+            const client = new Client({ on: function(){}, emit: function() {} })
 
-        it('should throw if neither .on() or .emit() are set', function()
-        {
-            expect(function()
-            {
-                new Client({})
-            })
-            .to.throw(`Client.constructor() expects transport to implement the method .on() and .emit()`)
+            expect(client.on).to.be.a('function')
+            expect(client.on.length).to.equal(2)
         })
     })
-
-    methods.forEach(method =>
-    {
-        it(`should implement .${method}()`, function()
-        {
-            let client = new Client({ on: function(){}, emit: function() {} })
-            expect(client[method]).to.be.a('function')
-        })
-    })
-
-    it('should implement .on()', function()
-    {
-        let client = new Client({ on: function(){}, emit: function() {} })
-
-        expect(client.on).to.be.a('function')
-        expect(client.on.length).to.equal(2)
-    })
-})
+}

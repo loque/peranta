@@ -4,7 +4,7 @@
   "description": "HTTP-like API for inter-process communication (IPC)",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec test/ test/**/*"
+    "test": "./node_modules/.bin/mocha"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
   "homepage": "https://github.com/loque/peranta#readme",
   "dependencies": {
     "array-flatten": "^2.1.0",
+    "object.values": "^1.0.3",
     "path-to-regexp": "^1.7.0",
     "qs": "^6.3.0",
     "url-parse": "^1.1.7",

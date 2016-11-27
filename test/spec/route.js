@@ -5,38 +5,49 @@ const methods = require('../../lib/constants/methods')
 const Route = require('../../lib/router/route')
 const Router = require('../../lib/router')
 
-describe('[spec] Route', function()
+module.exports = function()
 {
-    it(`should throw if the argument router is not an instance of Router`, function()
+    describe('Route', function()
     {
-        expect(function()
+        it(`should throw if the argument router is not an instance of Router`, function()
         {
-            let route = new Route(function(){})
+            expect(function()
+            {
+                const route = new Route(function(){})
+            })
+            .to.throw(`Route.constructor() expects router to be an instance of Router`)
         })
-        .to.throw(`Route.constructor() expects router to be an instance of Router`)
-    })
 
-    it(`should throw if the argument method is invalid`, function()
-    {
-        expect(function()
+        it(`should throw if the argument method is invalid`, function()
         {
-            let route = new Route(new Router(), 'GET')
+            expect(function()
+            {
+                const route = new Route(new Router(), 'GET')
+            })
+            .to.throw(`Route.constructor() method argument is invalid`)
         })
-        .to.throw(`Route.constructor() method argument is invalid`)
-    })
 
-    it('should throw if the argumet path is not a string', function()
-    {
-        expect(function () { new Route(new Router(), 'get', 1) }).to.throw(`Route.constructor() requires path to be a string`)
-    })
-
-    let interfaceMethods = ['getPath', 'setHandlers', 'match', 'handle', 'debug']
-    interfaceMethods.forEach(method =>
-    {
-        it(`should implement .${method}()`, function()
+        it('should throw if the argument path is not a string', function()
         {
-            let router = new Route(new Router(), 'get', 'path')
-            expect(router[method]).to.be.a('function')
+            expect(function () { new Route(new Router(), 'get', 1) }).to.throw(`Route.constructor() requires path to be a string`)
+        })
+
+        it('should throw if trying to set a router-as-middleware when Route is not created by .use()', function()
+        {
+            const users = new Router()
+            const root = new Router()
+
+            expect(function () { root.all('/users', users.middleware()) }).to.throw(`Router.setHandlers() can only accept a router-as-middleware only when created by .use()`)
+        })
+
+        const interfaceMethods = ['getPath', 'setHandlers', 'match', 'handle', 'debug']
+        interfaceMethods.forEach(method =>
+        {
+            it(`should implement .${method}()`, function()
+            {
+                const router = new Route(new Router(), 'get', 'path')
+                expect(router[method]).to.be.a('function')
+            })
         })
     })
-})
+}
