@@ -1,7 +1,7 @@
 {
   "name": "peranta",
   "version": "0.1.0",
-  "description": "HTTP-like API for inter-process communication (IPC)",
+  "description": "HTTP-like API for inter-process communication (IPC) in javascript",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha"
