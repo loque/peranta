@@ -26,8 +26,8 @@ const test = module.exports = function ()
 
         it(`should throw if ipc.send is not a function and ipc.channel is HTTP`, function()
         {
-            expect(function () { new Response({ channel: channels.HTTP, send: 'not a function' }) })
-            .to.throw(`Response.constructor() expects ipc.send to be a function when ipc.channel is 'HTTP'`)
+            expect(function () { new Response({ channel: channels.HTTP, sender: 'not a function' }) })
+            .to.throw(`Response.constructor() expects ipc.sender.send to be a function when ipc.channel is 'HTTP'`)
         })
 
         it(`should automatically generate an id when autoGenerateId === true`, function()
@@ -69,31 +69,31 @@ const test = module.exports = function ()
             {
                 function send(channel, res){}
 
-                const res = new Response({ channel: channels.HTTP, send }, 'something else')
+                const res = new Response({ channel: channels.HTTP, sender: { send } }, 'something else')
                 res.send('the body')
 
                 expect(res.body).to.equal('the body')
             })
 
-            it(`should call this.ipc.send with the channel as a first argument`, function()
+            it(`should call this.ipc.sender.send with the channel as a first argument`, function()
             {
                 function send(channel, res)
                 {
-                    expect(channel).to.equal(channels.HTTP)
+                    expect(channel).to.equal(channels.HTTP+'')
                 }
 
-                const res = new Response({ channel: channels.HTTP, send }, 'something else')
+                const res = new Response({ channel: channels.HTTP, sender: { send } }, 'something else')
                 res.send('the body')
             })
 
-            it(`should call this.ipc.send with itself as a second argument`, function()
+            it(`should call this.ipc.sender.send with itself as a second argument`, function()
             {
                 function send(channel, _res)
                 {
                     expect(_res).to.eql(res)
                 }
 
-                const res = new Response({ channel: channels.HTTP, send }, 'something else')
+                const res = new Response({ channel: channels.HTTP, sender: { send } }, 'something else')
                 res.send('the body')
             })
         })

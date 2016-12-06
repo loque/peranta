@@ -11,10 +11,10 @@ const Response = module.exports = function Response(ipc, autoGenerateId)
     if (!values(channels).includes(ipc.channel)) throw new TypeError(`Response.constructor() expects a supported ipc.channel`)
     if (
         ipc.channel === channels.HTTP
-        && (!ipc.hasOwnProperty('send') || typeof ipc.send !== 'function')
+        && (!ipc.hasOwnProperty('sender') || typeof ipc.sender.send !== 'function')
     )
     {
-        throw new TypeError(`Response.constructor() expects ipc.send to be a function when ipc.channel is 'HTTP'`)
+        throw new TypeError(`Response.constructor() expects ipc.sender.send to be a function when ipc.channel is 'HTTP'`)
     }
 
     this.id = autoGenerateId === true ? uuid.v4() : undefined
@@ -34,6 +34,5 @@ Response.prototype.send = function send(body)
 {
     this.body = body
     this.status = this.statusCode
-    this.ipc.send(this.ipc.channel, this)
-    // this.ipc.sender.send(this.ipc.channel, this)
+    this.ipc.sender.send(this.ipc.channel+'', this)
 }

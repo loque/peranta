@@ -25,7 +25,7 @@ const Server = module.exports = function Server(transport, router)
     // listen to the http channel
     this.transport.on(channels.HTTP, (event, req) =>
     {
-        let res = new Response({ channel: channels.HTTP, send: event.sender.send.bind(event) })
+        let res = new Response({ channel: channels.HTTP, sender: event.sender })
         res.id = req.id
 
         this.router.handle(req, res)

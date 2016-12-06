@@ -82,7 +82,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    // listen to the http channel
 	    this.transport.on(channels.HTTP, function (event, req) {
-	        var res = new Response({ channel: channels.HTTP, send: event.sender.send.bind(event) });
+	        var res = new Response({ channel: channels.HTTP, sender: event.sender });
 	        res.id = req.id;
 
 	        _this.router.handle(req, res);
@@ -162,8 +162,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if ((typeof ipc === 'undefined' ? 'undefined' : _typeof(ipc)) !== 'object') throw new TypeError('Response.constructor() expects the argument ipc to be an object');
 	    if (!ipc.hasOwnProperty('channel')) throw new TypeError('Response.constructor() expects the argument ipc to contain the property \'channel\'');
 	    if (!values(channels).includes(ipc.channel)) throw new TypeError('Response.constructor() expects a supported ipc.channel');
-	    if (ipc.channel === channels.HTTP && (!ipc.hasOwnProperty('send') || typeof ipc.send !== 'function')) {
-	        throw new TypeError('Response.constructor() expects ipc.send to be a function when ipc.channel is \'HTTP\'');
+	    if (ipc.channel === channels.HTTP && (!ipc.hasOwnProperty('sender') || typeof ipc.sender.send !== 'function')) {
+	        throw new TypeError('Response.constructor() expects ipc.sender.send to be a function when ipc.channel is \'HTTP\'');
 	    }
 
 	    this.id = autoGenerateId === true ? uuid.v4() : undefined;
@@ -181,8 +181,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Response.prototype.send = function send(body) {
 	    this.body = body;
 	    this.status = this.statusCode;
-	    this.ipc.send(this.ipc.channel, this);
-	    // this.ipc.sender.send(this.ipc.channel, this)
+	    this.ipc.sender.send(this.ipc.channel + '', this);
 	};
 
 /***/ },
