@@ -3,7 +3,7 @@
 const expect = require('chai').expect
 const events = require('events')
 
-const methods = require('../../lib/constants/methods')
+const methods = require('../../src/constants/methods')
 
 const Client = require('../adapter/client')
 const Server = require('../adapter/server')

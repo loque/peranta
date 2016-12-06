@@ -1,8 +1,8 @@
 'use strict'
 
 const expect = require('chai').expect
-const methods = require('../../lib/constants/methods')
-const Client = require('../../lib/client')
+const methods = require('../../src/constants/methods')
+const Client = require('../../src/client')
 
 module.exports = function test()
 {

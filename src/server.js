@@ -3,17 +3,17 @@
 const channels = require('./constants/channels')
 const methods = require('./constants/methods')
 const Response = require('./response')
-const Router = require('./router')
 
 const supportedOutputHandlers = ['send', 'broadcast']
 
-const Server = module.exports = function Server(transport, root = '/')
+const Server = module.exports = function Server(transport, router)
 {
     if (typeof transport !== 'object') throw new TypeError(`Server.constructor() expects transport to be an object`)
-    if (typeof root !== 'string') throw new TypeError(`Server.constructor() requires root to be a string`)
-    if (!(this instanceof Server)) return new Server(transport, root)
+    if (typeof router !== 'object') throw new TypeError(`Server.constructor() expects router to be an object`)
+    if (typeof router.handle !== 'function') throw new TypeError(`Server.constructor() expects router to implement the method .handle()`)
+    if (!(this instanceof Server)) return new Server(transport, router)
 
-    this.router = new Router(root)
+    this.router = router
     this.transport = transport
 
     // add output handlers defined on transport
@@ -26,7 +26,6 @@ const Server = module.exports = function Server(transport, root = '/')
     this.transport.on(channels.HTTP, (event, req) =>
     {
         let res = new Response({ channel: channels.HTTP, send: event.sender.send.bind(event) })
-        // let res = new Response({ channel: channels.HTTP, sender: event.sender })
         res.id = req.id
 
         this.router.handle(req, res)
@@ -40,6 +39,8 @@ methods.concat(['all', 'use', 'debug']).forEach(method =>
 {
     Server.prototype[method] = function (...args)
     {
+        if (typeof this.router[method] !== 'function') return
+
         return this.router[method](...args)
     }
 })

@@ -1,8 +1,8 @@
 'use strict'
 
 const expect = require('chai').expect
-const Response = require('../../lib/response')
-const channels = require('../../lib/constants/channels')
+const Response = require('../../src/response')
+const channels = require('../../src/constants/channels')
 const values = require('object.values')
 
 const test = module.exports = function ()

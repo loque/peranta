@@ -1,6 +1,7 @@
 'use strict'
 
-const Server = require('../../lib/server')
+const Server = require('../../server')
+const Router = require('../../router')
 
 function Transport(emitter)
 {
@@ -36,7 +37,7 @@ Transport.prototype.on = function on(channel, callback)
 
 function create(emitter)
 {
-    return new Server(new Transport(emitter))
+    return new Server(new Transport(emitter), new Router())
 }
 
 module.exports = { create }

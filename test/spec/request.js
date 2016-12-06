@@ -1,7 +1,7 @@
 'use strict'
 
 const expect = require('chai').expect
-const Request = require('../../lib/request')
+const Request = require('../../src/request')
 
 const test = module.exports = function ()
 {

@@ -1,6 +1,6 @@
 'use strict'
 
-const Client = require('../../lib/client')
+const Client = require('../../client')
 
 function Transport(emitter)
 {

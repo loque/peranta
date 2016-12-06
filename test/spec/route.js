@@ -1,9 +1,9 @@
 'use strict'
 
 const expect = require('chai').expect
-const methods = require('../../lib/constants/methods')
-const Route = require('../../lib/router/route')
-const Router = require('../../lib/router')
+const methods = require('../../src/constants/methods')
+const Route = require('../../src/router/route')
+const Router = require('../../src/router')
 
 module.exports = function()
 {

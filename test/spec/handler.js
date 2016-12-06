@@ -1,7 +1,7 @@
 'use strict'
 
 const expect = require('chai').expect
-const Handler = require('../../lib/router/handler')
+const Handler = require('../../src/router/handler')
 
 module.exports = function()
 {
