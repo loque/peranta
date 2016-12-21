@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = {
-    HTTP: 0,
-    EVENT: 1,
-    CONNECT: 2,
+    HTTP: '@@PERANTA_HTTP',
+    EVENT: '@@PERANTA_EVENT',
+    CONNECT: '@@PERANTA_CONNECT',
 }

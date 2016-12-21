@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+const PROD = JSON.parse(process.env.PROD_ENV || '0')
 
 module.exports = {
      entry: {
@@ -26,15 +27,20 @@ module.exports = {
          'url-parse': 'url-parse',
          'uuid': 'uuid',
      },
-    //  plugins: [
-    //     new webpack.optimize.UglifyJsPlugin({
-    //         compress: {
-    //             warnings: false,
-    //         },
-    //         output: {
-    //             comments: false,
-    //         },
-    //     }),
-    // ],
+     plugins: PROD ? [
+         // new webpack.DefinePlugin({
+         //     'process.env': {
+         //         NODE_ENV: JSON.stringify('production')
+         //     }
+         // }),
+         new webpack.optimize.UglifyJsPlugin({
+             compress: {
+                 warnings: false,
+             },
+             output: {
+                 comments: false,
+             },
+         }),
+     ] : [],
     // target: 'node',
  }

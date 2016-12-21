@@ -34,5 +34,5 @@ Response.prototype.send = function send(body)
 {
     this.body = body
     this.status = this.statusCode
-    this.ipc.sender.send(this.ipc.channel+'', this)
+    this.ipc.sender.send(this.ipc.channel, this)
 }
