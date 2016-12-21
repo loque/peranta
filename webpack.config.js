@@ -28,11 +28,6 @@ module.exports = {
          'uuid': 'uuid',
      },
      plugins: PROD ? [
-         // new webpack.DefinePlugin({
-         //     'process.env': {
-         //         NODE_ENV: JSON.stringify('production')
-         //     }
-         // }),
          new webpack.optimize.UglifyJsPlugin({
              compress: {
                  warnings: false,
@@ -40,7 +35,9 @@ module.exports = {
              output: {
                  comments: false,
              },
+             mangle: {
+                 keep_fnames: true,
+             },
          }),
      ] : [],
-    // target: 'node',
  }

@@ -59,12 +59,8 @@ Router.prototype.handle = function handle(req, res, parentNext)
         // no matching route found
         if (self.routeIdx >= self.routes.length) return self.end(req, res)
 
-        // console.log(`next`, self.routes[self.routeIdx].path)
-
         let route = self.routes[self.routeIdx]
         let match = route.match(req.method, req.path)
-
-        // console.log(`match [${req.method}] ${req.url} with [${route.method}] ${route.getPath()}`, match)
 
         self.routeIdx++
 

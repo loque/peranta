@@ -3,7 +3,7 @@
 const expect = require('chai').expect
 const methods = require('../../src/constants/methods')
 const Route = require('../../src/router/route')
-const Router = require('../../src/router')
+const Router = require('../../router')
 
 module.exports = function()
 {

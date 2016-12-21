@@ -2,8 +2,8 @@
 
 const expect = require('chai').expect
 const methods = require('../../src/constants/methods')
-const Server = require('../../src/server')
-const Router = require('../../src/router')
+const Server = require('../../server')
+const Router = require('../../router')
 
 const test = module.exports = function()
 {

@@ -2,7 +2,7 @@
 
 const expect = require('chai').expect
 const methods = require('../../src/constants/methods')
-const Client = require('../../src/client')
+const Client = require('../../client')
 
 module.exports = function test()
 {
