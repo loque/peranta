@@ -1,6 +1,6 @@
 {
   "name": "peranta",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "HTTP-like API for inter-process communication (IPC) in javascript",
   "main": "index.js",
   "scripts": {
