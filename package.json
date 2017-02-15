@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha",
-    "dev": "webpack --progress --colors",
+    "dev": "webpack --progress --colors --watch",
     "build": "PROD_ENV=1 webpack --progress --colors"
   },
   "repository": {

@@ -4,9 +4,17 @@ const pathToRegexp = require('path-to-regexp')
 const methods = require('../constants/methods')
 const Handler = require('./handler')
 
+function isRouter(router)
+{
+    if (typeof router.prefix !== 'string') return false
+    if (!Array.isArray(router.routes)) return false
+    if (typeof router.end !== 'function') return false
+    return true
+}
+
 const Route = module.exports = function Route(router, method, path, regexpOptions = {})
 {
-    if (router.constructor.name !== 'Router') throw new TypeError(`Route.constructor() expects router to be an instance of Router`)
+    if (isRouter(router) === false) throw new TypeError(`Route.constructor() expects router to be an instance of Router`)
     if (!methods.concat(['all', 'use']).includes(method)) throw new TypeError(`Route.constructor() method argument is invalid`)
     if (typeof path !== 'string') throw new TypeError(`Route.constructor() requires path to be a string`)
 

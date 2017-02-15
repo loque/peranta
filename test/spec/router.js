@@ -8,7 +8,7 @@ module.exports = function()
 {
     describe('Router', function()
     {
-        it('should throw if the argumet prefix is not a string', function()
+        it('should throw if the argument prefix is not a string', function()
         {
             expect(function () { new Router(1) }).to.throw(`Router.constructor() requires prefix to be a string`)
         })

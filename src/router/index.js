@@ -11,7 +11,6 @@ const Router = module.exports = function Router(prefix = '/')
 
     this.prefix = checkForwardSlashes(prefix)
     this.routes = []
-    this.routeIdx
     this.end = () => {}
 
     return this
@@ -24,7 +23,16 @@ methods.concat('all').forEach(method =>
         fns = flatten(fns)
         if (typeof path !== 'string') throw new TypeError(`Router.${method}() requires a path as the first parameter`)
         if (!fns.length) throw new TypeError(`Router.${method}() requires at least one function`)
-        if (!fns.every(handler => typeof handler === 'function')) throw new TypeError(`Router.${method}() requires middlewares to be of type "function"`)
+        if (!fns.every(handler => typeof handler === 'function'))
+        {
+            if (process.env.NODE_ENV !== 'production')
+            {
+                console.log(`path`, path)
+                console.log(`fns`, fns)
+                console.log(`method`, method)
+            }
+            throw new TypeError(`Router.${method}() requires middlewares to be of type "function"`)
+        }
 
         path = checkForwardSlashes(path)
 
