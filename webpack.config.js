@@ -2,7 +2,6 @@ const webpack = require('webpack')
 const PROD = process.env.NODE_ENV === 'production'
 
 const outputFilename = PROD ? '[name].min.js' : '[name].js'
-const outputLibraryTarget = process.env.BABEL_ENV === 'commonjs' ? 'commonjs' : 'umd'
 
 module.exports = {
      entry: {
@@ -14,7 +13,7 @@ module.exports = {
          path: './dist/dist',
          filename: outputFilename,
          library: 'Peranta',
-         libraryTarget: outputLibraryTarget,
+         libraryTarget: 'umd',
      },
      module: {
          loaders: [{
