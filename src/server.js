@@ -1,12 +1,11 @@
 'use strict'
 
-const channels = require('./constants/channels')
-const methods = require('./constants/methods')
-const Response = require('./response')
+import { channels, methods } from './constants'
+import Response from './response'
 
 const supportedOutputHandlers = ['send', 'broadcast']
 
-const Server = module.exports = function Server(transport, router)
+const Server = function Server(transport, router)
 {
     if (typeof transport !== 'object') throw new TypeError(`Server.constructor() expects transport to be an object`)
     if (typeof router !== 'object') throw new TypeError(`Server.constructor() expects router to be an object`)
@@ -59,3 +58,5 @@ function createOutputHandler(outputHandlerName)
         }
     }
 }
+
+export default Server

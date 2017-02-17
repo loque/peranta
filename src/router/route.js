@@ -1,8 +1,9 @@
 'use strict'
 
-const pathToRegexp = require('path-to-regexp')
-const methods = require('../constants/methods')
-const Handler = require('./handler')
+import pathToRegexp from 'path-to-regexp'
+
+import { methods } from '../constants'
+import Handler from './handler'
 
 function isRouter(router)
 {
@@ -12,7 +13,7 @@ function isRouter(router)
     return true
 }
 
-const Route = module.exports = function Route(router, method, path, regexpOptions = {})
+const Route = function Route(router, method, path, regexpOptions = {})
 {
     if (isRouter(router) === false) throw new TypeError(`Route.constructor() expects router to be an instance of Router`)
     if (!methods.concat(['all', 'use']).includes(method)) throw new TypeError(`Route.constructor() method argument is invalid`)
@@ -142,3 +143,5 @@ function prefixPath(path, prefix)
 
     return `${prefix}${path}`
 }
+
+export default Route

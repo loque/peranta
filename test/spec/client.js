@@ -1,10 +1,11 @@
 'use strict'
 
-const expect = require('chai').expect
-const methods = require('../../src/constants/methods')
-const Client = require('../../client')
+import { expect } from 'chai'
 
-module.exports = function test()
+import { methods } from '../../src/constants'
+import Client from '../../src/client'
+
+export default function test()
 {
     describe('Client', function()
     {

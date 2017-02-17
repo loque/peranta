@@ -1,7 +1,7 @@
 'use strict'
 
-const simpleSetup = require('./behavior/simple-setup')
-const nestedRouters = require('./behavior/nested-routers')
+import simpleSetup from './behavior/simple-setup'
+import nestedRouters from './behavior/nested-routers'
 
 describe('Behavior', function()
 {

@@ -1,11 +1,12 @@
 'use strict'
 
-const expect = require('chai').expect
-const methods = require('../../src/constants/methods')
-const Route = require('../../src/router/route')
-const Router = require('../../router')
+import { expect } from 'chai'
 
-module.exports = function()
+import { methods } from '../../src/constants'
+import Route from '../../src/router/route'
+import Router from '../../src/router'
+
+export default function()
 {
     describe('Route', function()
     {

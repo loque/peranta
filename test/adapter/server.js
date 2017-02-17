@@ -1,7 +1,9 @@
 'use strict'
 
-const Server = require('../../server')
-const Router = require('../../router')
+import Server from '../../src/server'
+import Router from '../../src/router'
+
+// console.log(`Router`, Router)
 
 function Transport(emitter)
 {
@@ -40,4 +42,4 @@ function create(emitter)
     return new Server(new Transport(emitter), new Router())
 }
 
-module.exports = { create }
+export default { create }

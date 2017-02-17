@@ -1,10 +1,11 @@
 'use strict'
 
-const uuid = require('uuid')
-const channels = require('./constants/channels')
-const values = require('object.values')
+import uuid from 'uuid'
+import values from 'object.values'
 
-const Response = module.exports = function Response(ipc, autoGenerateId)
+import { channels } from './constants'
+
+const Response = function Response(ipc, autoGenerateId)
 {
     if (typeof ipc !== 'object') throw new TypeError(`Response.constructor() expects the argument ipc to be an object`)
     if (!ipc.hasOwnProperty('channel')) throw new TypeError(`Response.constructor() expects the argument ipc to contain the property 'channel'`)
@@ -36,3 +37,5 @@ Response.prototype.send = function send(body)
     this.status = this.statusCode
     this.ipc.sender.send(this.ipc.channel, this)
 }
+
+export default Response

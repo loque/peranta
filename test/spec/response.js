@@ -1,9 +1,10 @@
 'use strict'
 
-const expect = require('chai').expect
-const Response = require('../../src/response')
-const channels = require('../../src/constants/channels')
-const values = require('object.values')
+import { expect } from 'chai'
+import values from 'object.values'
+
+import Response from '../../src/response'
+import { channels } from '../../src/constants'
 
 const test = module.exports = function ()
 {

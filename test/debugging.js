@@ -1,8 +1,8 @@
 'use strict'
 
-const handler = require('./debugging/handler')
-const route = require('./debugging/route')
-const router = require('./debugging/router')
+import handler from './debugging/handler'
+import route from './debugging/route'
+import router from './debugging/router'
 
 describe('Debugging', function()
 {

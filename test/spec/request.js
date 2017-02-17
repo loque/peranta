@@ -1,7 +1,8 @@
 'use strict'
 
-const expect = require('chai').expect
-const Request = require('../../src/request')
+import { expect } from 'chai'
+
+import Request from '../../src/request'
 
 const test = module.exports = function ()
 {

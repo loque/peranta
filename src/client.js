@@ -1,11 +1,11 @@
 'use strict'
 
-const uuid = require('uuid')
-const channels = require('./constants/channels')
-const methods = require('./constants/methods')
-const Request = require('./request')
+import uuid from 'uuid'
 
-const Client = module.exports = function Client(transport)
+import { channels, methods } from './constants'
+import Request from './request'
+
+const Client = function Client(transport)
 {
     if (transport === undefined) throw new TypeError(`Client.constructor() expects to receive a transport`)
     if (!(this instanceof Client)) return new Client(transport)
@@ -51,7 +51,7 @@ methods.forEach(method =>
     {
         const promise = exposePromise()
         const req = new Request(url)
-        
+
         req.method = method
 
         if (['post', 'put'].includes(req.method))
@@ -87,3 +87,5 @@ function exposePromise()
 
     return promise
 }
+
+export default Client

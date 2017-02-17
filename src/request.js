@@ -1,9 +1,9 @@
 'use strict'
 
-const uuid = require('uuid')
-const urlparse = require('url-parse')
+import uuid from 'uuid'
+import urlparse from 'url-parse'
 
-const Request = module.exports = function Request(url)
+const Request = function Request(url)
 {
     if (typeof url !== 'string') throw new TypeError(`Request.constructor() requires url to be a string`)
 
@@ -55,3 +55,4 @@ const Request = module.exports = function Request(url)
 
     return this
 }
+ export default Request

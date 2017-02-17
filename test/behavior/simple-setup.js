@@ -1,12 +1,11 @@
 'use strict'
 
-const expect = require('chai').expect
-const events = require('events')
+import { expect } from 'chai'
+import events from 'events'
 
-const methods = require('../../src/constants/methods')
-
-const Client = require('../adapter/client')
-const Server = require('../adapter/server')
+import { methods } from '../../src/constants'
+import Client from '../adapter/client'
+import Server from '../adapter/server'
 
 const test = module.exports = function ()
 {

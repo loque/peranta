@@ -1,5 +1,8 @@
 const webpack = require('webpack')
-const PROD = JSON.parse(process.env.PROD_ENV || '0')
+const PROD = process.env.NODE_ENV === 'production'
+
+const outputFilename = PROD ? '[name].min.js' : '[name].js'
+const outputLibraryTarget = process.env.BABEL_ENV === 'commonjs' ? 'commonjs' : 'umd'
 
 module.exports = {
      entry: {
@@ -8,9 +11,10 @@ module.exports = {
          router: './src/router/index.js',
      },
      output: {
-         path: './',
-         filename: '[name].js',
-         libraryTarget: 'umd',
+         path: './dist/dist',
+         filename: outputFilename,
+         library: 'Peranta',
+         libraryTarget: outputLibraryTarget,
      },
      module: {
          loaders: [{

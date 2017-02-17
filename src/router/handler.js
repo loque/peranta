@@ -1,6 +1,6 @@
 'use strict'
 
-const Handler = module.exports = function Handler(type, handler)
+const Handler = function Handler(type, handler)
 {
     if (typeof type !== 'string') throw new TypeError(`Handler.constructor() requires type to be a string`)
     if (typeof handler !== 'function') throw new TypeError(`Handler.constructor() requires handler to be of type function`)
@@ -49,3 +49,5 @@ Handler.prototype.setPrefix = function setPrefix()
 
     this.handler.setPrefix(this.handler.getRoutePrefix())
 }
+
+export default Handler

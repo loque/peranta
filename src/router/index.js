@@ -1,10 +1,11 @@
 'use strict'
 
-const flatten = require('array-flatten')
-const methods = require('../constants/methods')
-const Route = require('./route')
+import flatten from 'array-flatten'
 
-const Router = module.exports = function Router(prefix = '/')
+import { methods } from '../constants'
+import Route from './route'
+
+const Router = function Router(prefix = '/')
 {
     if (typeof prefix !== 'string') throw new TypeError(`Router.constructor() requires prefix to be a string`)
     if (!(this instanceof Router)) return new Router(prefix)
@@ -128,3 +129,5 @@ function checkForwardSlashes(path)
 
     return path
 }
+
+export default Router

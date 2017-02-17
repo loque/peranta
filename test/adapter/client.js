@@ -1,6 +1,6 @@
 'use strict'
 
-const Client = require('../../client')
+import Client from '../../src/client'
 
 function Transport(emitter)
 {
@@ -38,4 +38,4 @@ function create(emitter)
     return new Client(new Transport(emitter))
 }
 
-module.exports = { create }
+export default { create }
