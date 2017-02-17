@@ -1,16 +1,16 @@
 {
   "name": "peranta",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "HTTP-like API for inter-process communication (IPC) in javascript",
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=production ./node_modules/.bin/mocha --compilers js:babel-core/register",
     "clean_dist": "shx rm -rf ./dist && mkdirp ./dist",
-    "copy-pkg": "node ./scripts/copy_pkg.js",
+    "copy-pkg": "mkdirp ./dist && node ./scripts/copy_pkg.js",
     "build-cjs": "cross-env BABEL_ENV=commonjs babel src --out-dir dist",
     "build-umd": "NODE_ENV=production webpack --progress --colors",
-    "build": "run-s clean_dist build-cjs build-umd",
-    "prepublish": "run-s build copy-pkg"
+    "build": "npm run clean_dist && npm run build-cjs && npm run build-umd",
+    "prepublish": "npm run build && npm run copy-pkg"
   },
   "repository": {
     "type": "git",
@@ -47,7 +47,6 @@
     "chai": "^3.5.0",
     "cross-env": "^3.1.4",
     "mocha": "^3.1.2",
-    "npm-run-all": "^4.0.1",
     "shx": "^0.2.2",
     "webpack": "^1.13.3"
   }
