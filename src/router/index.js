@@ -106,6 +106,7 @@ Router.prototype.middleware = function middleware()
 
     routerAsMiddleware.debug = this.debug.bind(this)
     routerAsMiddleware.setPrefix = this.setPrefix.bind(this)
+    routerAsMiddleware.isMiddleware = true
 
     return routerAsMiddleware
 }

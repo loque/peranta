@@ -3,8 +3,6 @@
 import Server from '../../src/server'
 import Router from '../../src/router'
 
-// console.log(`Router`, Router)
-
 function Transport(emitter)
 {
     this.receivers = {}

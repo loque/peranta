@@ -6,7 +6,7 @@ const Handler = function Handler(type, handler)
     if (typeof handler !== 'function') throw new TypeError(`Handler.constructor() requires handler to be of type function`)
 
     // middleware, callback, router
-    this.type = handler.name === 'routerAsMiddleware' ? 'router' : type
+    this.type = handler.hasOwnProperty('isMiddleware') && handler.isMiddleware === true ? 'router' : type
     this.handler = handler
 
     return this

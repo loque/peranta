@@ -38,9 +38,6 @@ module.exports = {
              output: {
                  comments: false,
              },
-             mangle: {
-                 keep_fnames: true,
-             },
          }),
      ] : [],
  }
