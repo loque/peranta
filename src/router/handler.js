@@ -1,3 +1,5 @@
+// @flow
+
 'use strict'
 
 const Handler = function Handler(type, handler)

@@ -1,0 +1,13 @@
+[ignore]
+.*/dist/.*
+.*/flow-typed/.*
+.*/node_modules/.*
+
+[include]
+
+[libs]
+
+[options]
+module.file_ext=.js
+module.system=haste
+module.use_strict=true

@@ -26,9 +26,9 @@ module.exports = {
          'array-flatten': 'array-flatten',
          'object.values': 'object.values',
          'path-to-regexp': 'path-to-regexp',
-         'qs': 'qs',
+         qs: 'qs',
          'url-parse': 'url-parse',
-         'uuid': 'uuid',
+         uuid: 'uuid',
      },
      plugins: PROD ? [
          new webpack.optimize.UglifyJsPlugin({

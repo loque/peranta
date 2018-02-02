@@ -1,3 +1,5 @@
+// @flow
+
 'use strict'
 
 import { channels, methods } from './constants'
@@ -24,7 +26,7 @@ const Server = function Server(transport, router)
     // listen to the http channel
     this.transport.on(channels.HTTP, (event, req) =>
     {
-        let res = new Response({ channel: channels.HTTP, sender: event.sender })
+        const res = new Response({ channel: channels.HTTP, sender: event.sender })
         res.id = req.id
 
         this.router.handle(req, res)
@@ -50,7 +52,7 @@ function createOutputHandler(outputHandlerName)
     {
         this[outputHandlerName] = function (url, body)
         {
-            let res = new Response({ channel: channels.EVENT }, true)
+            const res = new Response({ channel: channels.EVENT }, true)
             res.url = url
             res.body = body
 

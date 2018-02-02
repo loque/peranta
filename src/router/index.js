@@ -1,3 +1,5 @@
+// @flow
+
 'use strict'
 
 import flatten from 'array-flatten'
@@ -37,7 +39,7 @@ methods.concat('all').forEach(method =>
 
         path = checkForwardSlashes(path)
 
-        let route = new Route(this, method, path)
+        const route = new Route(this, method, path)
         route.setHandlers(fns)
         this.routes.push(route)
 
@@ -48,18 +50,18 @@ methods.concat('all').forEach(method =>
 Router.prototype.use = function use(...fns)
 {
     fns = flatten(fns)
-    let path = typeof fns[0] === 'string' ? checkForwardSlashes(fns.shift()) : '/'
+    const path = typeof fns[0] === 'string' ? checkForwardSlashes(fns.shift()) : '/'
     if (!fns.length) throw new TypeError(`Router.use() requires middleware functions`)
     if (!fns.every(fn => typeof fn === 'function')) throw new TypeError(`Router.use() requires middlewares to be of type "function"`)
 
-    let route = new Route(this, 'use', path, { end: false })
+    const route = new Route(this, 'use', path, { end: false })
     route.setHandlers(fns)
     this.routes.push(route)
 }
 
 Router.prototype.handle = function handle(req, res, parentNext)
 {
-    let self = this
+    const self = this
     this.routeIdx = 0 // reset index
     next()
 
@@ -68,8 +70,8 @@ Router.prototype.handle = function handle(req, res, parentNext)
         // no matching route found
         if (self.routeIdx >= self.routes.length) return self.end(req, res)
 
-        let route = self.routes[self.routeIdx]
-        let match = route.match(req.method, req.path)
+        const route = self.routes[self.routeIdx]
+        const match = route.match(req.method, req.path)
 
         self.routeIdx++
 
@@ -86,7 +88,7 @@ Router.prototype.setPrefix = function setPrefix(prefix)
 
 Router.prototype.debug = function debug(json = false)
 {
-    let data = {
+    const data = {
         prefix: this.prefix,
         routes: this.routes.map(route => route.debug())
     }
@@ -97,7 +99,7 @@ Router.prototype.debug = function debug(json = false)
 // implement the middleware interface
 Router.prototype.middleware = function middleware()
 {
-    let handle = this.handle.bind(this)
+    const handle = this.handle.bind(this)
 
     function routerAsMiddleware(req, res, next)
     {

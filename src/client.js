@@ -1,3 +1,5 @@
+// @flow
+
 'use strict'
 
 import uuid from 'uuid'
@@ -25,7 +27,7 @@ const Client = function Client(transport)
 
     this.transport.on(channels.HTTP, (event, res) =>
     {
-        let promiseResult = res.status >= 200 && res.status < 300 ? 'resolve' : 'reject'
+        const promiseResult = res.status >= 200 && res.status < 300 ? 'resolve' : 'reject'
         this.httpHandlers[res.id].promise[promiseResult](res)
         delete this.httpHandlers[res.id]
     })
@@ -74,9 +76,9 @@ Client.prototype.on = function on(url, callback)
 
 function exposePromise()
 {
-    let resolver,
-        rejector,
-        promise = new Promise((resolve, reject) =>
+    let resolver, rejector
+
+    const promise = new Promise((resolve, reject) =>
         {
             resolver = resolve
             rejector = reject

@@ -1,6 +1,6 @@
 'use strict'
 
-import Client from '../../src/client'
+import Client from '../../dist/client'
 
 function Transport(emitter)
 {
@@ -11,8 +11,8 @@ function Transport(emitter)
     {
         if (!Array.isArray(message)) throw new TypeError(`message from server is not an array`)
 
-        let channel = message.shift()
-        let res = message.shift()
+        const channel = message.shift()
+        const res = message.shift()
 
         if (this.receivers.hasOwnProperty(channel))
         {

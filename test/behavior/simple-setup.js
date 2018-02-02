@@ -7,23 +7,23 @@ import { methods } from '../../src/constants'
 import Client from '../adapter/client'
 import Server from '../adapter/server'
 
-const test = module.exports = function ()
+const test = module.exports = () =>
 {
-    describe('Simple setup', function()
+    describe('Simple setup', () =>
     {
         methods.concat('all').forEach(method =>
         {
-            it(`should handle .${method}()`, function()
-            {
-                let emitter = new events.EventEmitter()
+            it(`should handle .${method}()`, () =>
+			{
+                const emitter = new events.EventEmitter()
 
-                let server = Server.create(emitter)
+                const server = Server.create(emitter)
                 server[method]('/', (req, res) =>
                 {
                     res.status(200).send('tada')
                 })
 
-                let client = Client.create(emitter)
+                const client = Client.create(emitter)
 
                 if (method == 'all')
                 {
@@ -38,17 +38,17 @@ const test = module.exports = function ()
             })
         })
 
-        it(`should handle variables in url (aka, params)`, function()
-        {
-            let emitter = new events.EventEmitter()
+        it(`should handle variables in url (aka, params)`, () =>
+		{
+            const emitter = new events.EventEmitter()
 
-            let server = Server.create(emitter)
+            const server = Server.create(emitter)
             server.get('/:id', (req, res) =>
             {
                 res.status(200).send(req.params.id)
             })
 
-            let client = Client.create(emitter)
+            const client = Client.create(emitter)
             return client.get('/8')
             .then(res =>
             {
@@ -56,17 +56,17 @@ const test = module.exports = function ()
             })
         })
 
-        it(`should handle variables in the query string`, function()
-        {
-            let emitter = new events.EventEmitter()
+        it(`should handle variables in the query string`, () =>
+		{
+            const emitter = new events.EventEmitter()
 
-            let server = Server.create(emitter)
+            const server = Server.create(emitter)
             server.get('/home', (req, res) =>
             {
                 res.status(200).send(req.query.id)
             })
 
-            let client = Client.create(emitter)
+            const client = Client.create(emitter)
             return client.get('/home?id=8')
             .then(res =>
             {
@@ -74,17 +74,17 @@ const test = module.exports = function ()
             })
         })
 
-        it(`should handle variables in body`, function()
-        {
-            let emitter = new events.EventEmitter()
+        it(`should handle variables in body`, () =>
+		{
+            const emitter = new events.EventEmitter()
 
-            let server = Server.create(emitter)
+            const server = Server.create(emitter)
             server.post('/', (req, res) =>
             {
                 res.status(200).send(req.body.id)
             })
 
-            let client = Client.create(emitter)
+            const client = Client.create(emitter)
             return client.post('/', { id: 8 })
             .then(res =>
             {
@@ -92,11 +92,11 @@ const test = module.exports = function ()
             })
         })
 
-        it(`properties added to req should stick between handlers`, function()
-        {
-            let emitter = new events.EventEmitter()
+        it(`properties added to req should stick between handlers`, () =>
+		{
+            const emitter = new events.EventEmitter()
 
-            let server = Server.create(emitter)
+            const server = Server.create(emitter)
             server.use((req, res, next) =>
             {
                 req.someProperty = 'someValue'
@@ -108,7 +108,7 @@ const test = module.exports = function ()
                 res.status(200).send(req.someProperty)
             })
 
-            let client = Client.create(emitter)
+            const client = Client.create(emitter)
             return client.get('/')
             .then(res =>
             {
@@ -116,11 +116,11 @@ const test = module.exports = function ()
             })
         })
 
-        it(`properties added to res should stick between handlers`, function()
-        {
-            let emitter = new events.EventEmitter()
+        it(`properties added to res should stick between handlers`, () =>
+		{
+            const emitter = new events.EventEmitter()
 
-            let server = Server.create(emitter)
+            const server = Server.create(emitter)
             server.use((req, res, next) =>
             {
                 res.someProperty = 'someValue'
@@ -132,7 +132,7 @@ const test = module.exports = function ()
                 res.status(200).send(res.someProperty)
             })
 
-            let client = Client.create(emitter)
+            const client = Client.create(emitter)
             return client.get('/')
             .then(res =>
             {
@@ -140,15 +140,15 @@ const test = module.exports = function ()
             })
         })
 
-        describe('server.all()', function()
-        {
+        describe('server.all()', () =>
+		{
             methods.forEach(method =>
             {
-                it(`should intercept [${method}] requests`, function()
-                {
-                    let emitter = new events.EventEmitter()
+                it(`should intercept [${method}] requests`, () =>
+				{
+                    const emitter = new events.EventEmitter()
 
-                    let server = Server.create(emitter)
+                    const server = Server.create(emitter)
                     server.all('/', (req, res) =>
                     {
                         res.status(200).send(true)
@@ -158,7 +158,7 @@ const test = module.exports = function ()
                         res.status(200).send(false)
                     })
 
-                    let client = Client.create(emitter)
+                    const client = Client.create(emitter)
                     return client[method]('/')
                     .then(res =>
                     {
@@ -168,15 +168,15 @@ const test = module.exports = function ()
             })
         })
 
-        describe('server.use()', function()
-        {
+        describe('server.use()', () =>
+		{
             methods.forEach(method =>
             {
-                it(`should intercept [${method}] requests`, function()
-                {
-                    let emitter = new events.EventEmitter()
+                it(`should intercept [${method}] requests`, () =>
+				{
+                    const emitter = new events.EventEmitter()
 
-                    let server = Server.create(emitter)
+                    const server = Server.create(emitter)
                     server.use('/', (req, res) =>
                     {
                         res.status(200).send(true)
@@ -186,7 +186,7 @@ const test = module.exports = function ()
                         res.status(200).send(false)
                     })
 
-                    let client = Client.create(emitter)
+                    const client = Client.create(emitter)
                     return client[method]('/')
                     .then(res =>
                     {
@@ -196,13 +196,13 @@ const test = module.exports = function ()
             })
         })
 
-        describe('next([route])', function()
-        {
-            it(`should continue to next route when calling next('route')`, function()
-            {
-                let emitter = new events.EventEmitter()
+        describe('next([route])', () =>
+		{
+            it(`should continue to next route when calling next('route')`, () =>
+			{
+                const emitter = new events.EventEmitter()
 
-                let server = Server.create(emitter)
+                const server = Server.create(emitter)
 
                 server.use(
                     (req, res, next) =>
@@ -223,7 +223,7 @@ const test = module.exports = function ()
                     res.status(200).send(true)
                 })
 
-                let client = Client.create(emitter)
+                const client = Client.create(emitter)
                 return client.get('/')
                 .then(res =>
                 {
@@ -236,9 +236,9 @@ const test = module.exports = function ()
                 const timeout = 1500
                 this.timeout(timeout)
 
-                let emitter = new events.EventEmitter()
+                const emitter = new events.EventEmitter()
 
-                let server = Server.create(emitter)
+                const server = Server.create(emitter)
                 server.use(
                     (req, res, next) =>
                     {
@@ -258,9 +258,9 @@ const test = module.exports = function ()
                     }
                 )
 
-                let reqStatus = new ReqStatus()
+                const reqStatus = new ReqStatus()
 
-                let client = Client.create(emitter)
+                const client = Client.create(emitter)
 
                 client.get('/')
                 .then(res =>

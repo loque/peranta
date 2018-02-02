@@ -1,7 +1,7 @@
 'use strict'
 
-import Server from '../../src/server'
-import Router from '../../src/router'
+import Server from '../../dist/server'
+import Router from '../../dist/router'
 
 function Transport(emitter)
 {
@@ -12,12 +12,12 @@ function Transport(emitter)
     {
         if (!Array.isArray(message)) throw new TypeError(`message from client is not an array`)
 
-        let channel = message.shift()
-        let req = message.shift()
+        const channel = message.shift()
+        const req = message.shift()
 
         if (this.receivers.hasOwnProperty(channel))
         {
-            let event = {
+            const event = {
                 sender:
                 {
                     send: (channel, res) => this.emitter.emit('response', [channel, res])

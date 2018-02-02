@@ -1,3 +1,5 @@
+// @flow
+
 'use strict'
 
 import pathToRegexp from 'path-to-regexp'
@@ -41,7 +43,7 @@ Route.prototype.setHandlers = function setHandlers(fns)
 {
     this.handlers = fns.map((fn, fnIdx) =>
     {
-        let type = fnIdx === fns.length - 1 && fn.length < 3 ? 'callback' : 'middleware'
+        const type = fnIdx === fns.length - 1 && fn.length < 3 ? 'callback' : 'middleware'
 
         if (fn.hasOwnProperty('setPrefix'))
         {
@@ -60,7 +62,7 @@ Route.prototype.match = function match(method, url)
     // or any request when this.method is set to [all] or [use]
     if (this.method !== method && this.method !== 'all' && this.method !== 'use') return false
 
-    let result = this.pathMatcher(url)
+    const result = this.pathMatcher(url)
 
     if (result === false) return false
 
@@ -75,7 +77,7 @@ Route.prototype.handle = function handle(req, res, routerNext)
     req.params = this.params
     this.handlerIdx = 0
 
-    let self = this
+    const self = this
     next()
 
     function next(err)
@@ -84,7 +86,7 @@ Route.prototype.handle = function handle(req, res, routerNext)
 
         if (self.handlerIdx >= self.handlers.length) return routerNext()
 
-        let handler = self.handlers[self.handlerIdx]
+        const handler = self.handlers[self.handlerIdx]
 
         self.handlerIdx++
 
@@ -96,7 +98,7 @@ Route.prototype.handle = function handle(req, res, routerNext)
 
 Route.prototype.debug = function debug(json = false)
 {
-    let data = {
+    const data = {
         path: this.getPath(),
         method: this.method,
         handlers: this.handlers.map(handler => handler.debug())
@@ -111,17 +113,17 @@ function createPathMatcher(getPath, options)
 
     return function pathMatcher(url, params)
     {
-        let path = getPath()
+        const path = getPath()
 
-        let keys = []
+        const keys = []
         params = params || {}
 
-        let regexp = pathToRegexp(path, keys, options)
-        let result = regexp.exec(url)
+        const regexp = pathToRegexp(path, keys, options)
+        const result = regexp.exec(url)
 
         if(result === null) return false
 
-        let match = result.shift()
+        const match = result.shift()
 
         keys.forEach((key, i) =>
         {

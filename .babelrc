@@ -1,13 +1,6 @@
 {
-    "presets": ["es2015", "stage-2"],
-    "env": {
-        "production": {
-        },
-        "development": {
-        },
-        "test": {
-            "plugins": [
-            ]
-        }
-    }
+    "presets": ["flow", "es2015", "stage-2"],
+    "plugins": [
+		"add-module-exports"
+    ]
 }
